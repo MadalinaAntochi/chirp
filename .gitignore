@@ -25,6 +25,9 @@ media
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
+
+
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
@@ -221,6 +224,8 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+
+.idea/
 
 # Windows Installer files
 *.cab
