@@ -22,4 +22,3 @@ class Like(TimestampModel):
 class Follow(TimestampModel):
     followed_user=models.ForeignKey(User, related_name='followed_by')
     following_user=models.ForeignKey(User, related_name='following')
-
