@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views.generic.edit import CreateView
 
-from message.forms import RegisterForm
+from message.forms import RegisterForm, MessageForm
 
 from django.views.generic.list import ListView
 
@@ -35,3 +35,15 @@ class TimelineView(ListView):
             return Message.objects.filter(user=self.request.user)
         else:
             return Message.objects.all()
+
+
+
+class MessageView(CreateView):
+    form_class = MessageForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user_id = self.request.user.id
+        self.object.save()
+        return redirect(self.get_success_url())

@@ -20,7 +20,7 @@ from django.views.generic.base import TemplateView
 # as este folosit pt a eticheta views (folosesc eticheta)
 from django.contrib.auth import views as auth_views
 
-from message.views import RegisterView, TimelineView
+from message.views import RegisterView, TimelineView, MessageView
 
 # se adauga la link-ul paginii web: http://127.0.0.1:8000/    -->    register/
 #il folosesc in template/base.html     astfel-->   <a href="{% url 'register' %}" ...>
@@ -31,4 +31,5 @@ urlpatterns = [
     url(r'^register/$', RegisterView.as_view(), name='register'),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'index'}, name='logout'),
+    url(r'^message/$', MessageView.as_view(), name='message'),
 ]

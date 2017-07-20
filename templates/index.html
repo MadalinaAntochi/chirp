@@ -3,16 +3,25 @@
 <div class="row-container">
 
 
+
     {% if user.is_authenticated %}
-    <input type="text" name="message" placeholder="What's on your mind?" align="center" autofocus maxlength="140" required id="id_message"/>
 
-    <br>
+        <form method="post" action="{% url 'message' %}">
+               {% csrf_token %}
 
-    <button type="submit" class="color-btn">Chirp</button>
+            <input type="text" name="status" placeholder="What's on your mind?" align="center" autofocus maxlength="140" required id="id_message"/>
 
-    <br>
-    <br>
-    <br>
+
+            <br>
+
+
+            <button type="submit" class="color-btn">Chirp</button>
+
+            <br>
+            <br>
+            <br>
+
+        </form>
     {% endif %}
 
 

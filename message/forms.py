@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 # forms --> formularele scrise in python care vor aparea pe pagina web (afisarea in pagina html e facuta in views)
+from message.models import Message
+
 
 class RegisterForm(forms.ModelForm):
     class Meta:
@@ -31,3 +33,9 @@ class RegisterForm(forms.ModelForm):
         if commit:
             new_user.save()
         return  new_user
+
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['status']
