@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+# forms --> formularele scrise in python care vor aparea pe pagina web (afisarea in pagina html e facuta in views)
 
 class RegisterForm(forms.ModelForm):
     class Meta:
@@ -10,7 +11,7 @@ class RegisterForm(forms.ModelForm):
 
         #parola nu trebuie sa fie vizibila
         widgets = {
-            "password": forms.PasswordInput
+            "password": forms.PasswordInput(attrs={"class": "password-field"}),
         }
     retype_password=forms.CharField(widget=forms.PasswordInput)
 
@@ -30,5 +31,3 @@ class RegisterForm(forms.ModelForm):
         if commit:
             new_user.save()
         return  new_user
-
-

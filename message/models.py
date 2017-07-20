@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
+# modelele --> clasele ce dau structura tabelelor
+
+# tabela User se creaza automat
 
 class TimestampModel(models.Model):
     class Meta:
@@ -12,6 +14,10 @@ class TimestampModel(models.Model):
 class Message(TimestampModel):
     user=models.ForeignKey(User)
     status=models.TextField(null=False, max_length=140, blank=False)
+
+    # __str__ este toString-ul din Java
+    def __str__(self):
+        return self.status
 
 
 class Like(TimestampModel):

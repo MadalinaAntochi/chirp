@@ -16,9 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic.base import TemplateView
+
+# as este folosit pt a eticheta views (folosesc eticheta)
 from django.contrib.auth import views as auth_views
 
 from message.views import RegisterView, TimelineView
+
+# se adauga la link-ul paginii web: http://127.0.0.1:8000/    -->    register/
+#il folosesc in template/base.html     astfel-->   <a href="{% url 'register' %}" ...>
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

@@ -4,3 +4,64 @@ h2 {
 .register-form {
     margin-top: 200px;
 }
+
+.chirp {
+    .margin: 10px 0;
+}
+
+.username {
+    font-size: 16px;
+}
+
+.row-container {
+    margin-top: 100px;
+}
+
+.error-field {
+    border-color: red;
+}
+
+.color-btn {
+    width: 9%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 7px 5px;
+    margin: 4px 0;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.divv {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    .margin: 10px;
+    height: 200px;
+    width: 200px;
+}
+
+inputt[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+inputt[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+inputt[type=submit]:hover {
+    background-color: #45a049;
+}
