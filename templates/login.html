@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<h3 align="center">
+    Login
+</h3>
 <form method="post" class="register-form" align="center">
     {% csrf_token %}
     {{ form.non_field_errors }}

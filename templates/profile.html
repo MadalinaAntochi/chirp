@@ -24,31 +24,67 @@
     </div>
     <div class="col-xs-9">
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="#">Chirps</a></li>
-            <li role="presentation"><a href="#">Following</a></li>
-            <li role="presentation"><a href="#">Followers</a></li>
+            <li role="presentation" class="active"><a data-toggle="tab" href="#chirps">Chirps</a></li>
+            <li role="presentation" ><a data-toggle="tab" href="#following">Following</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#followers">Followers</a></li>
         </ul>
+        
+        <div class="tab-content">
 
-        {% for message in chirps %}
-        <div class="row chirp">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <p>
-                        {% if user == message.user %}
-                        <span class="label label-primary username">@{{ message.user.username }}</span>
-                        {% else %}
-                        <span class="label label-default username">@{{ message.user.username }}</span>
-                        {% endif %}
-                        <small>{{ message.created }}</small>
-                    </p>
-                    <p>{{ message }}</p>
+            <div id="chirps" class="tab-pane fade in active">
+                <h3>Chirps</h3>
+                {% for message in chirps %}
+                <div class="row chirp">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>
+                                {% if user == message.user %}
+                                <span class="label label-primary username">@{{ message.user.username }}</span>
+                                {% else %}
+                                <span class="label label-default username">@{{ message.user.username }}</span>
+                                {% endif %}
+                                <small>{{ message.created }}</small>
+                            </p>
+                            <p>{{ message }}</p>
+                        </div>
+                    </div>
                 </div>
+                {% endfor %}
+            </div>
+
+            <div id="following" class="tab-pane fade">
+                <h3>Following</h3>
+                {% for followed_user in following1 %}
+                <div class="row chirp">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>
+                                <span class="label label-primary username">User {{ object }} follows user {{ followed_user }}</span>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <div id="followers" class="tab-pane fade">
+                <h3>Followers</h3>
+                {% for followers_user in followers1 %}
+                <div class="row chirp">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>
+                                <span class="label label-primary username">User {{ followers_user }} follows user {{ object }}</span>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
-
-        {% endfor %}
-
     </div>
-
 </div>
 {% endblock %}

@@ -36,9 +36,9 @@ class TimelineView(ListView):
     def get_queryset(self):
         # implement the logic
         if self.request.user.is_authenticated:
-            return Message.objects.filter(user=self.request.user)
+            return Message.objects.filter(user=self.request.user).order_by("-created")
         else:
-            return Message.objects.all()
+            return Message.objects.all().order_by("-created")
 
 
 # facuta de mine ( m-a ajutat Martin )
@@ -67,6 +67,11 @@ class ProfileBaseView(DetailView):
         followers = Follow.objects.filter(followed_user=self.request.user)
         context["followers"] = [f.following_user for f in following]
 
+        following = Follow.objects.filter(following_user=self.get_object())
+        context["following1"] = [f.followed_user for f in following]
+
+        followers = Follow.objects.filter(followed_user=self.get_object())
+        context["followers1"] = [f.following_user for f in followers]
         return context
 
 
@@ -78,7 +83,6 @@ class MyProfileView(ProfileBaseView):
 class ProfileView(ProfileBaseView):
     def get_slug_field(self):
         return "username"
-
 
 
 

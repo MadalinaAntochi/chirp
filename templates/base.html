@@ -50,6 +50,7 @@
             User: {{ request.user }}  /
             </a>
 
+            <a class="navbar-brand" href="{% url 'my-profile' %}">My Profile</a>
             <a class="navbar-brand" href="{% url 'logout' %}">Logout</a>
             {% else %}
 
