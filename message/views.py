@@ -87,11 +87,32 @@ def follow_user(request, username):
 
     user = get_object_or_404(User, username=username)
     try:
+        #imi creaza un follow in baza de date
         follow = Follow(followed_user=user, following_user=request.user)
         follow.save()
+
         messages.info(request, "You are now following {0}".format(username))
+
     except IntegrityError:
         messages.error(request, "You are already following this user")
+
+
+    return redirect('profile', username)
+
+
+# m-a ajutat Martin
+def unfollow_user(request, username):
+
+    user = get_object_or_404(User, username=username)
+    try:
+        # imi returneaza un follow din baza de date
+        follow = Follow.objects.get(followed_user=user,following_user=request.user)
+        follow.delete()
+
+        messages.info(request, "You are now unfollowing {0}".format(username))
+
+    except IntegrityError:
+        messages.error(request, "You are already unfollowing this user")
 
 
     return redirect('profile', username)
