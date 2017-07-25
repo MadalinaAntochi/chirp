@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-xs-3">
+        <span class="glyphicon glyphicon-user profile-icon" aria-hidden="true"></span><br>
+        <span>{{ object.first_name }} {{ object.last_name }}</span><br>
+        <span>@{{ object.username }}</span><br>
+        <span>{{ object.email }}</span><br>
+
+        {% if request.user != object %}
+            {% if object in following %}
+                <button type="submit" class="btn btn-primary follow">Unfollow</button>
+            {% else %}
+                <form method="post" action="{% url 'follow_user' object.username %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary follow">Follow</button>
+                </form>
+            {% endif %}
+        {% endif %}
+
+    </div>
+    <div class="col-xs-9">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">Chirps</a></li>
+            <li role="presentation"><a href="#">Following</a></li>
+            <li role="presentation"><a href="#">Followers</a></li>
+        </ul>
+
+        {% for message in chirps %}
+        <div class="row chirp">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>
+                        {% if user == message.user %}
+                        <span class="label label-primary username">@{{ message.user.username }}</span>
+                        {% else %}
+                        <span class="label label-default username">@{{ message.user.username }}</span>
+                        {% endif %}
+                        <small>{{ message.created }}</small>
+                    </p>
+                    <p>{{ message }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}

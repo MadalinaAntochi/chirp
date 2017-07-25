@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic.base import TemplateView
+from django.contrib.auth.decorators import login_required
 
 # as este folosit pt a eticheta views (folosesc eticheta)
 from django.contrib.auth import views as auth_views
 
-from message.views import RegisterView, TimelineView, MessageView
+from message.views import RegisterView, TimelineView, MyProfileView, ProfileView, MessageView, follow_user
 
 # se adauga la link-ul paginii web: http://127.0.0.1:8000/    -->    register/
 #il folosesc in template/base.html     astfel-->   <a href="{% url 'register' %}" ...>
@@ -29,7 +30,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', TimelineView.as_view(), name='index'),
     url(r'^register/$', RegisterView.as_view(), name='register'),
-    url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^accounts/login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'index'}, name='logout'),
     url(r'^message/$', MessageView.as_view(), name='message'),
+    url(r'^my-profile/$', login_required(MyProfileView.as_view()), name='my-profile'),
+    url(r'^profile/(?P<slug>[-\w]+)/$', login_required(ProfileView.as_view()), name='profile'),
+    url(r'^follow/(?P<username>[-\w]+)/$', login_required(follow_user), name='follow_user'),
 ]
