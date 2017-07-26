@@ -5,32 +5,18 @@
 </h3>
 <div class="row-container">
 
-
-
-
     {% if user.is_authenticated %}
-
         <form method="post" action="{% url 'message' %}">
-               {% csrf_token %}
-
+            {% csrf_token %}
             <input type="text" name="status" placeholder="What's on your mind?" align="center" autofocus maxlength="140" required id="id_message"/>
-
-
             <br>
-
-
             <button type="submit" class="color-btn">Chirp</button>
-
-            <br>
-            <br>
-            <br>
-
+            <br><br><br>
         </form>
     {% endif %}
 
 
     {% for message in object_list %}
-
     <div class="row chirp">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -46,7 +32,6 @@
             </div>
         </div>
     </div>
-
     {% endfor %}
 </div>
 {% endblock %}

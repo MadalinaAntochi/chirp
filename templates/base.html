@@ -51,11 +51,15 @@
             </a>
 
             <a class="navbar-brand" href="{% url 'my-profile' %}">My Profile</a>
+            <a class="navbar-brand" href="{% url 'profiles' %}">Profiles</a>
+            <a class="navbar-brand" href="{% url 'index' %}">Chirps</a>
             <a class="navbar-brand" href="{% url 'logout' %}">Logout</a>
             {% else %}
 
             <a class="navbar-brand" href="{% url 'login' %}">Login</a>
             <a class="navbar-brand" href="{% url 'register' %}">Register</a>
+            <a class="navbar-brand" href="{% url 'admin:index' %}">Admin</a>
+
             {% endif %}
         </div>
     </div>

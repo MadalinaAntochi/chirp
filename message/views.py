@@ -32,7 +32,7 @@ class TimelineView(ListView):
     template_name = 'index.html'
 
     #model='message'
-
+    # get_queryset = obtineti setul de interogari, aici se returneaza o lista care indeplineste niste conditii
     def get_queryset(self):
         # implement the logic
         if self.request.user.is_authenticated:
@@ -52,6 +52,10 @@ class MessageView(CreateView):
         self.object.save()
         return redirect(self.get_success_url())
 
+# DetailView ( e legat de url ->slug=care se refera la un camp unic din tabela )  are functii:
+# def get_context_data(..) = obtine date de context
+# def get_object(..)
+# def get_slug_field(..)
 
 class ProfileBaseView(DetailView):
     model = User
@@ -87,7 +91,7 @@ class ProfileView(ProfileBaseView):
 
 
 def follow_user(request, username):
-    print(username)
+    #print(username)
 
     user = get_object_or_404(User, username=username)
     try:
@@ -120,3 +124,11 @@ def unfollow_user(request, username):
 
 
     return redirect('profile', username)
+
+
+class ProfilesView(ListView):
+    model = User
+    template_name = 'profiles.html'
+
+    #ListView are functii care returneaza automat niste liste; de aceea se obtin atat de usor toti user-ii in functie de modelul dat: User
+    context_object_name = 'users'

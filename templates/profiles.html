@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 align="center">
+    Profiles
+</h3>
+<div class="row-container">
+
+    {% for current_user in users %}
+    <div class="row chirp">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    {% if user == current_user %}
+                    <span class="label label-primary username">
+
+                        Username: @{{ current_user.username }} <br>
+                        First name:
+                        {% if current_user.first_name == '' %} .....  <br>
+                        {% else %}
+                        {{ current_user.first_name }} <br>
+                        {% endif %}
+
+                        Last name:
+                        {% if current_user.last_name == '' %} .....  <br>
+                        {% else %}
+                        {{ current_user.last_name }} <br>
+                        {% endif %}
+
+                        Email address:
+                        {% if current_user.email == '' %} .....  <br>
+                        {% else %}
+                        {{ current_user.email }} <br>
+                        {% endif %}
+
+                    </span>
+                    {% else %}
+                    <span class="label label-default username">
+
+                        Username: @{{ current_user.username }} <br>
+                        First name:
+                        {% if current_user.first_name == '' %} .....  <br>
+                        {% else %}
+                        {{ current_user.first_name }} <br>
+                        {% endif %}
+
+                        Last name:
+                        {% if current_user.last_name == '' %} .....  <br>
+                        {% else %}
+                        {{ current_user.last_name }} <br>
+                        {% endif %}
+
+                        Email address:
+                        {% if current_user.email == '' %} .....  <br>
+                        {% else %}
+                        {{ current_user.email }} <br>
+                        {% endif %}
+
+                    </span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

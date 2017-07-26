@@ -22,7 +22,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 
 from message.views import RegisterView, TimelineView, MyProfileView, ProfileView, MessageView, follow_user, \
-    unfollow_user
+    unfollow_user, ProfilesView
 
 # se adauga la link-ul paginii web: http://127.0.0.1:8000/    -->    register/
 #il folosesc in template/base.html     astfel-->   <a href="{% url 'register' %}" ...>
@@ -41,4 +41,5 @@ urlpatterns = [
 
     url(r'^unfollow/(?P<username>[-\w]+)/$', login_required(unfollow_user), name='unfollow_user'),
 
+    url(r'^profiles/$', login_required(ProfilesView.as_view()), name='profiles'),
 ]
