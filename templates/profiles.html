@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3 align="center">
-    Profiles
+    All Profiles
 </h3>
 <div class="row-container">
 
@@ -34,7 +34,7 @@
 
                     </span>
                     {% else %}
-                    <span class="label label-default username">
+                    <span>
 
                         Username: @{{ current_user.username }} <br>
                         First name:
@@ -56,6 +56,13 @@
                         {% endif %}
 
                     </span>
+                    <br>
+
+                    {% csrf_token %}
+                    <a href="{% url 'profile' current_user.username %}">
+                        <button type="submit" class="color-btn">View Profile</button>
+                    </a>
+
                     {% endif %}
                 </p>
             </div>

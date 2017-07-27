@@ -1,6 +1,8 @@
 from django.contrib import messages
+from django.http.response import JsonResponse
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.detail import DetailView
 from django.db.utils import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
@@ -14,7 +16,8 @@ from django.views.generic.list import ListView
 #
 from django.contrib.auth.models import User
 
-from message.models import Message, Follow
+from message.models import Message, Follow, Like
+
 
 # cred ca la pagina -> template_name, apare formularul -> form_class
 
@@ -34,11 +37,14 @@ class TimelineView(ListView):
     #model='message'
     # get_queryset = obtineti setul de interogari, aici se returneaza o lista care indeplineste niste conditii
     def get_queryset(self):
-        # implement the logic
-        if self.request.user.is_authenticated:
-            return Message.objects.filter(user=self.request.user).order_by("-created")
-        else:
-            return Message.objects.all().order_by("-created")
+        # returneaza mesajele user-ului daca e logat altfel le returneaza pe toate
+        #if self.request.user.is_authenticated:
+        #    return Message.objects.filter(user=self.request.user).order_by("-created")
+        #else:
+        #    return Message.objects.all().order_by("-created")
+
+        # -created = descrescator dupa data crearii
+        return Message.objects.all().order_by("-created")
 
 
 # facuta de mine ( m-a ajutat Martin )
@@ -132,3 +138,31 @@ class ProfilesView(ListView):
 
     #ListView are functii care returneaza automat niste liste; de aceea se obtin atat de usor toti user-ii in functie de modelul dat: User
     context_object_name = 'users'
+
+@csrf_exempt
+def like_message(request):
+    if request.method=='POST':
+        #print('Sunt aici')
+
+        message_id = request.POST.get('id')
+        print (message_id)
+
+        like_value = bool(int(request.POST.get('like')))
+        print (like_value)
+
+        message = get_object_or_404(Message, id=message_id)
+
+        # daca apas pe like de 2 ori at se sterge like-ul, idem pt dislike
+        try:
+            like = Like.objects.get(user=request.user, message = message)
+
+            if like.like == like_value:
+                like.delete()
+            else:
+                like.like=like_value
+                like.save()
+        except Like.DoesNotExist:
+            like=Like(user=request.user, message=message, like=like_value)
+            like.save()
+
+    return  JsonResponse({'succes':'true'})

@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3 align="center">
-    Index = Chirps
+    Chirps
 </h3>
 <div class="row-container">
 
     {% if user.is_authenticated %}
-        <form method="post" action="{% url 'message' %}">
-            {% csrf_token %}
-            <input type="text" name="status" placeholder="What's on your mind?" align="center" autofocus maxlength="140" required id="id_message"/>
-            <br>
-            <button type="submit" class="color-btn">Chirp</button>
-            <br><br><br>
-        </form>
+    <form method="post" action="{% url 'message' %}">
+        {% csrf_token %}
+        <input type="text" name="status" placeholder="What's on your mind?" align="center" autofocus maxlength="140"
+               required id="id_message"/>
+        <br>
+        <button type="submit" class="color-btn">Chirp</button>
+        <br><br><br>
+    </form>
     {% endif %}
 
 
@@ -26,9 +27,23 @@
                     {% else %}
                     <span class="label label-default username">@{{ message.user.username }}</span>
                     {% endif %}
-                    <small>{{ message.created }}</small>
+                    <small>Created:{{ message.created }}</small>
                 </p>
-                <p>{{ message }}</p>
+                <br>
+
+                <p>{{ message }}<br><br>
+                    {% if user.is_authenticated %}
+                    <button class="like-message" data-messageid=" {{ message.id }}"
+                            {% if request.user in message.like_users %} style="color:green" {% endif %}>
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    </button>
+
+                    <button class="dislike-message" data-messageid=" {{ message.id }}"
+                            {% if request.user in message.dislike_users %} style="color:red" {% endif %}>
+                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                    </button>
+                    {% endif %}
+                </p>
             </div>
         </div>
     </div>
