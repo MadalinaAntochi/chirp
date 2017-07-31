@@ -11,48 +11,51 @@
             <div class="panel-body">
                 <p>
                     {% if user == current_user %}
-                    <span class="label label-primary username">
+                    <span>
 
-                        Username: @{{ current_user.username }} <br>
-                        First name:
-                        {% if current_user.first_name == '' %} .....  <br>
+                    <h4> My profile:</h4>
+
+                        <span class="label label-primary username">  Username </span>: <span class="label label-primary username"> @{{ current_user.username }}</span> <br><br>
+                        <span class="label label-primary username"> First name </span>: <span class="label label-primary username">
+                        {% if current_user.first_name == '' %} .....  </span> <br> <br>
                         {% else %}
-                        {{ current_user.first_name }} <br>
+                        {{ current_user.first_name }} </span> <br> <br>
                         {% endif %}
 
-                        Last name:
-                        {% if current_user.last_name == '' %} .....  <br>
+                        <span class="label label-primary username"> Last name </span>: <span class="label label-primary username">
+                        {% if current_user.last_name == '' %} .....  </span> <br> <br>
                         {% else %}
-                        {{ current_user.last_name }} <br>
+                        {{ current_user.last_name }} </span> <br> <br>
                         {% endif %}
 
-                        Email address:
-                        {% if current_user.email == '' %} .....  <br>
+                        <span class="label label-primary username"> Email address  </span>: <span class="label label-primary username">
+                        {% if current_user.email == '' %} .....  </span> <br> <br>
                         {% else %}
-                        {{ current_user.email }} <br>
+                        {{ current_user.email }} </span> <br> <br>
                         {% endif %}
+
 
                     </span>
                     {% else %}
                     <span>
 
-                        Username: @{{ current_user.username }} <br>
-                        First name:
-                        {% if current_user.first_name == '' %} .....  <br>
+                        <span class="label label-default username"> Username </span>: <span class="label label-default username"> @{{ current_user.username }}</span> <br><br>
+                        <span class="label label-default username"> First name </span>: <span class="label label-default username">
+                        {% if current_user.first_name == '' %} .....  </span> <br> <br>
                         {% else %}
-                        {{ current_user.first_name }} <br>
+                        {{ current_user.first_name }} </span> <br> <br>
                         {% endif %}
 
-                        Last name:
-                        {% if current_user.last_name == '' %} .....  <br>
+                        <span class="label label-default username"> Last name </span>: <span class="label label-default username">
+                        {% if current_user.last_name == '' %} .....  </span> <br> <br>
                         {% else %}
-                        {{ current_user.last_name }} <br>
+                        {{ current_user.last_name }} </span> <br> <br>
                         {% endif %}
 
-                        Email address:
-                        {% if current_user.email == '' %} .....  <br>
+                        <span class="label label-default username"> Email address  </span>: <span class="label label-default username">
+                        {% if current_user.email == '' %} .....  </span> <br> <br>
                         {% else %}
-                        {{ current_user.email }} <br>
+                        {{ current_user.email }} </span> <br> <br>
                         {% endif %}
 
                     </span>

@@ -5,30 +5,38 @@
 </h3><br>
 <div class="row">
     <div class="col-xs-3">
-        <span class="glyphicon glyphicon-user profile-icon" aria-hidden="true"></span><br>
-        <span>{{ object.first_name }} {{ object.last_name }}</span><br>
-        <span>@{{ object.username }}</span><br>
-        <span>{{ object.email }}</span><br>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    <span class="glyphicon glyphicon-user profile-icon" aria-hidden="true"></span><br>
+
+                    <span>{{ object.first_name }} {{ object.last_name }}</span><br>
+                    <span>@{{ object.username }}</span><br>
+                    <span>{{ object.email }}</span><br>
+                </p>
+            </div>
+        </div>
 
         {% if request.user != object %}
-            {% if object in following %}
-                <form method="post" action="{% url 'unfollow_user' object.username %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary follow">Unfollow</button>
-                </form>
-            {% else %}
-                <form method="post" action="{% url 'follow_user' object.username %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary follow">Follow</button>
-                </form>
-            {% endif %}
+        {% if object in following %}
+        <form method="post" action="{% url 'unfollow_user' object.username %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary follow">Unfollow</button>
+        </form>
+        {% else %}
+        <form method="post" action="{% url 'follow_user' object.username %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary follow">Follow</button>
+        </form>
+        {% endif %}
         {% endif %}
 
     </div>
     <div class="col-xs-9">
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a data-toggle="tab" href="#chirps">My Chirps</a></li>
-            <li role="presentation" ><a data-toggle="tab" href="#following">Following</a></li>
+            <li role="presentation"><a data-toggle="tab" href="#following">Following</a></li>
             <li role="presentation"><a data-toggle="tab" href="#followers">Followers</a></li>
         </ul>
 

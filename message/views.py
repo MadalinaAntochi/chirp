@@ -75,7 +75,7 @@ class ProfileBaseView(DetailView):
         context["following"] = [f.followed_user for f in following]
 
         followers = Follow.objects.filter(followed_user=self.request.user)
-        context["followers"] = [f.following_user for f in following]
+        context["followers"] = [f.following_user for f in followers]
 
         following = Follow.objects.filter(following_user=self.get_object())
         context["following1"] = [f.followed_user for f in following]
